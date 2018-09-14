@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * Created on 5/23/17.
+ *  Updated 9/14/18
  */
 public class HomePage extends BasePage {
 
@@ -16,8 +16,7 @@ public class HomePage extends BasePage {
     }
 
     public void validateTitleIsPresent() {
-        WebElement title = driver.findElement(By.cssSelector("h1"));
-        Assert.assertTrue(title != null);
+        Assert.assertEquals("name game", driver.getTitle());
     }
 
 
