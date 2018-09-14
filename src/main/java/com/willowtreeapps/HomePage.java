@@ -44,6 +44,33 @@ public class HomePage extends BasePage {
         // wait for page load
         sleep(3000);
 
+        // assign variable streak to integer value in element w/className "streak" text
+        int streak = Integer.parseInt(driver.findElement(By.className("streak")).getText());
+
+        // assign variable name to string value in element w/id "name" text
+        String name = driver.findElement(By.id("name")).getText();
+
+        // create a list of names associated w/className "name"
+        List<WebElement> names = driver.findElements(By.className("name"));
+
+        // loop through all names in the list
+        for (int i = 0; i < names.size(); i++) {
+
+            // find the name from the list that matches name queried and click it
+            if (names.get(i).getText().equals(name)) {
+
+                driver.findElements(By.className("photo")).get(i).click();
+            }
+        }
+
+        // wait element update
+        sleep(3000);
+
+        // assign variable streak to integer value in element w/className "streak" text
+        int newStreak = Integer.parseInt(driver.findElement(By.className("streak")).getText());
+
+        // assert variable newStreak is greater than streak; clicking correct photo increases streak counter
+        Assert.assertTrue(newStreak > streak);
         takeScreenShot("validateStreakCounter");
 
     }
