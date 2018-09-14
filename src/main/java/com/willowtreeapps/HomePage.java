@@ -170,5 +170,12 @@ public class HomePage extends BasePage {
         takeScreenShot("validateCountersIncreaseAfter10Attempts");
     }
 
+    public void validateClickingCorrectPhotoChangesPhotoAndNames() throws IOException {
+        // wait for page load
+        sleep(3000);
+
+        takeScreenShot("validateNewPhotosAndNames");
+    }
+
 
 }
