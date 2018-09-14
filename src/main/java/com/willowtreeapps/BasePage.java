@@ -97,4 +97,9 @@ public class BasePage {
         }
     }
 
+    public void takeScreenShot(String screenShotName) throws IOException {
+        File screenShotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenShotFile, new File("./webdriverScreenshot/" + screenShotName + ".png"));
+    }
+
 }
