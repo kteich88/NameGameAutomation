@@ -39,6 +39,12 @@ public class WebTest {
                 .validateClickingFirstPhotoIncreasesTriesCounter();
     }
 
+    @Test
+    public void test_clicking_correct_photo_increases_streak_counter() throws IOException {
+        new HomePage(driver)
+                .validateClickingCorrectPhotoIncreasesStreakCounter();
+    }
+
     @After
     public void teardown() {
         driver.quit();

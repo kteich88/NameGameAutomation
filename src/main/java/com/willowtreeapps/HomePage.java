@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  *  Updated 9/14/18
@@ -36,6 +37,14 @@ public class HomePage extends BasePage {
 
         Assert.assertTrue(attemptAfter > attempt);
         takeScreenShot("validateTriesCounter");
+
+    }
+
+    public void validateClickingCorrectPhotoIncreasesStreakCounter() throws IOException {
+        // wait for page load
+        sleep(3000);
+
+        takeScreenShot("validateStreakCounter");
 
     }
 }
