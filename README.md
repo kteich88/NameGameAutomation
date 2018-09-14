@@ -23,3 +23,7 @@
   - `test > java > com.willowtreeapps > WebTest`
   - Right click on any method tagged with `@Test`
   - Click on `Run 'test_...()`
+  
+### Running Screenshot Shell Script
+- To remove old screenshot files and start fresh, run `sh clean_up.sh`
+
