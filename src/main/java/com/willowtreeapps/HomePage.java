@@ -37,7 +37,6 @@ public class HomePage extends BasePage {
 
         Assert.assertTrue(attemptAfter > attempt);
         takeScreenShot("validateTriesCounter");
-
     }
 
     public void validateClickingCorrectPhotoIncreasesStreakCounter() throws IOException {
@@ -72,7 +71,6 @@ public class HomePage extends BasePage {
         // assert variable newStreak is greater than streak; clicking correct photo increases streak counter
         Assert.assertTrue(newStreak > streak);
         takeScreenShot("validateStreakCounter");
-
     }
 
     public void validateClickingIncorrectPhotoResetsStreakCounter() throws IOException {
@@ -118,7 +116,59 @@ public class HomePage extends BasePage {
         // assert variable newStreak is less than streak; clicking incorrect photo decreases streak counter
         Assert.assertTrue(newStreak < streak);
         takeScreenShot("validateStreakCounterReset");
-
     }
+
+    public void validateClicking10PhotosIncreasesCountersCorrectly() throws IOException {
+        // wait for page load
+        sleep(3000);
+
+        // initialize variables both "correct" and "attempts" count start at zerp
+        int correctCount = 0;
+        int attemptsCount = 0;
+
+        // Loop through below actions while variable attemptsCount is less than 10; click through 10 attempts
+        while (attemptsCount < 10) {
+
+            // create a list of photos associated w/className "photo"
+            List<WebElement> photos = driver.findElements(By.className("photo"));
+
+            // loop through all photos
+            for (int i = 0; i < photos.size() && attemptsCount < 10; i++) {
+                String name = driver.findElement(By.id("name")).getText();
+
+                // click on the next photo in the loop
+                driver.findElements(By.className("photo")).get(i).click();
+
+                // if the name matches the photo, increment both counters, exit loop
+                if (driver.findElements(By.className("name")).get(i).getText().equals(name)) {
+
+                    // add to existing count number; increment each counter by one
+                    attemptsCount++;
+                    correctCount++;
+
+                    break;
+
+                    // otherwise the photo and name do not match, only increment the attempts counter
+                } else {
+                    attemptsCount++;
+                }
+
+            }
+
+            // wait for page reload
+            sleep(5000);
+
+        }
+
+        // assign variables for counts after 10 attempts
+        int attemptsCountAfter = Integer.parseInt(driver.findElement(By.className("attempts")).getText());
+        int correctCountAfter = Integer.parseInt(driver.findElement(By.className("correct")).getText());
+
+        // assert variables are equal; counters increment correctly
+        Assert.assertTrue(attemptsCount == attemptsCountAfter);
+        Assert.assertTrue(correctCount == correctCountAfter);
+        takeScreenShot("validateCountersIncreaseAfter10Attempts");
+    }
+
 
 }
