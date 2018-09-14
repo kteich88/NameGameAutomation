@@ -13,28 +13,31 @@ import java.util.List;
  */
 public class HomePage extends BasePage {
 
-
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
     public void validateTitleIsPresent() {
+        // ensures we are testing page expected
         Assert.assertEquals("name game", driver.getTitle());
     }
-
 
     public void validateClickingFirstPhotoIncreasesTriesCounter() throws IOException {
         // wait for page load
         sleep(3000);
 
+        // assign variable attempt to integer value in element w/className "attempts" text
         int attempt = Integer.parseInt(driver.findElement(By.className("attempts")).getText());
 
         driver.findElement(By.className("photo")).click();
 
+        // wait for element update
         sleep(3000);
 
+        // assign variable attemptAfter to integer value in element w/className "attempts" text
         int attemptAfter = Integer.parseInt(driver.findElement(By.className("attempts")).getText());
 
+        // assert variable attemptAfter is greater than attempt; clicking photo increases tries counter
         Assert.assertTrue(attemptAfter > attempt);
         takeScreenShot("validateTriesCounter");
     }
@@ -145,19 +148,15 @@ public class HomePage extends BasePage {
                     // add to existing count number; increment each counter by one
                     attemptsCount++;
                     correctCount++;
-
                     break;
-
                     // otherwise the photo and name do not match, only increment the attempts counter
                 } else {
                     attemptsCount++;
                 }
-
             }
 
             // wait for page reload
             sleep(5000);
-
         }
 
         // assign variables for counts after 10 attempts
