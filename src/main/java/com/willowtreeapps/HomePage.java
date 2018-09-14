@@ -74,4 +74,51 @@ public class HomePage extends BasePage {
         takeScreenShot("validateStreakCounter");
 
     }
+
+    public void validateClickingIncorrectPhotoResetsStreakCounter() throws IOException {
+        // wait for page load
+        sleep(3000);
+
+        // start streak
+        List<WebElement> names = driver.findElements(By.className("name"));
+        String name = driver.findElement(By.id("name")).getText();
+
+        for (int i = 0; i < names.size(); i++) {
+            if (names.get(i).getText().equals(name)) {
+                driver.findElements(By.className("photo")).get(i).click();
+            }
+        }
+
+        // wait for the page to reload
+        sleep(5000);
+
+        // assign variable streak to integer value in element w/className "streak" text
+        int streak = Integer.parseInt(driver.findElement(By.className("streak")).getText());
+
+        // recall variables to prevent stale element exception
+        names = driver.findElements(By.className("name"));
+        name = driver.findElement(By.id("name")).getText();
+
+        // if the first photo name doesn't match the name queried, click it; otherwise, click the next photo
+        if (names.get(0).getText().equals(name)) {
+
+            driver.findElements(By.className("photo")).get(1).click();
+
+        } else {
+
+            driver.findElements(By.className("photo")).get(0).click();
+        }
+
+        // wait element update
+        sleep(3000);
+
+        // assign variable streak to integer value in element w/className "streak" text
+        int newStreak = Integer.parseInt(driver.findElement(By.className("streak")).getText());
+
+        // assert variable newStreak is less than streak; clicking incorrect photo decreases streak counter
+        Assert.assertTrue(newStreak < streak);
+        takeScreenShot("validateStreakCounterReset");
+
+    }
+
 }

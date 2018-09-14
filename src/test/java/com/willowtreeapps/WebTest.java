@@ -45,6 +45,12 @@ public class WebTest {
                 .validateClickingCorrectPhotoIncreasesStreakCounter();
     }
 
+    @Test
+    public void test_clicking_incorrect_photo_resets_streak_counter() throws IOException {
+        new HomePage(driver)
+                .validateClickingIncorrectPhotoResetsStreakCounter();
+    }
+
     @After
     public void teardown() {
         driver.quit();
