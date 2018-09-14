@@ -174,8 +174,28 @@ public class HomePage extends BasePage {
         // wait for page load
         sleep(3000);
 
+        // define variables for name queried, names and photos on the page
+        String name = driver.findElement(By.id("name")).getText();
+        List<WebElement> photos = driver.findElements(By.className("photo"));
+        List<WebElement> names = driver.findElements(By.className("name"));
+
+        // find the correct name/photo match and answer correctly
+        for (int i = 0; i < names.size(); i++) {
+            if (names.get(i).getText().equals(name)) {
+                driver.findElements(By.className("photo")).get(i).click();
+            }
+        }
+
+        // wait for page reload
+        sleep(5000);
+
+        // define lists for updated elements
+        List<WebElement> newNames = driver.findElements(By.className("name"));
+        List<WebElement> newPhotos = driver.findElements(By.className("photo"));
+
+        // assert variables are not equal indicating there are new names and photos on the page
+        Assert.assertTrue(!photos.equals(newPhotos));
+        Assert.assertTrue(!names.equals(newNames));
         takeScreenShot("validateNewPhotosAndNames");
     }
-
-
 }
