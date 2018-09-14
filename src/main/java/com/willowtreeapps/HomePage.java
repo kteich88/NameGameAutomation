@@ -21,18 +21,19 @@ public class HomePage extends BasePage {
 
 
     public void validateClickingFirstPhotoIncreasesTriesCounter() {
-        //Wait for page to load
-        sleep(6000);
+        // wait for page load
+        sleep(3000);
 
-        int count = Integer.parseInt(driver.findElement(By.className("attempts")).getText());
+        int attempt = Integer.parseInt(driver.findElement(By.className("attempts")).getText());
 
         driver.findElement(By.className("photo")).click();
 
-        sleep(6000);
+        sleep(3000);
 
-        int countAfter = Integer.parseInt(driver.findElement(By.className("attempts")).getText());
+        int attemptAfter = Integer.parseInt(driver.findElement(By.className("attempts")).getText());
 
-        Assert.assertTrue(countAfter > count);
+        Assert.assertTrue(attemptAfter > attempt);
+        takeScreenShot("validateTriesCounter");
 
     }
 }
