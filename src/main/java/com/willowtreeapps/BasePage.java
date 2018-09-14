@@ -1,15 +1,16 @@
 package com.willowtreeapps;
 
+import org.apache.commons.io.FileUtils;
 import org.assertj.swing.assertions.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created on 5/23/17.
+ * Updated 9/14/18
  */
 public class BasePage {
 
@@ -35,7 +36,7 @@ public class BasePage {
                 return this; // test passes
             }
         } catch (Exception e) {
-            Assertions.fail(String.format("Attribute not fount! [Attribute: %s] [Desired value: %s] [Actual value: %s] [Element: %s] [Message: %s]",
+            Assertions.fail(String.format("Attribute not found! [Attribute: %s] [Desired value: %s] [Actual value: %s] [Element: %s] [Message: %s]",
                     attr,
                     regex,
                     actual,
