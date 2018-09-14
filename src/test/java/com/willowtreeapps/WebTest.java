@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.io.IOException;
+
 public class WebTest {
 
     private WebDriver driver;
@@ -32,7 +34,7 @@ public class WebTest {
     }
 
     @Test
-    public void test_clicking_photo_increases_tries_counter() {
+    public void test_clicking_photo_increases_tries_counter() throws IOException {
         new HomePage(driver)
                 .validateClickingFirstPhotoIncreasesTriesCounter();
     }

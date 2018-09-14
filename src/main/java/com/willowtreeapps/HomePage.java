@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.io.IOException;
+
 /**
  *  Updated 9/14/18
  */
@@ -20,7 +22,7 @@ public class HomePage extends BasePage {
     }
 
 
-    public void validateClickingFirstPhotoIncreasesTriesCounter() {
+    public void validateClickingFirstPhotoIncreasesTriesCounter() throws IOException {
         // wait for page load
         sleep(3000);
 
